@@ -24,7 +24,7 @@ const Calendar = (): React.ReactElement => {
     // dispatch(getChosenDateAC(date));
 
     history.push({
-      pathname: "/timetable-editor",
+      pathname: "/timetabler",
       state: {
         chosenDate: date,
       },
@@ -32,14 +32,14 @@ const Calendar = (): React.ReactElement => {
   };
 
   const onCancelButtonClick = () => {
-    history.replace("/account");
+    history.replace("/teachers");
   };
 
   return (
     <Slide top>
       <CalendarContainer>
         <Slide top>
-          <CalendarTitle>Выберите дату для редактирования расписания.</CalendarTitle>
+          <CalendarTitle>Выберите дату для просмотра расписания.</CalendarTitle>
         </Slide>
 
         <Slide top>
