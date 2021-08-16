@@ -1,12 +1,26 @@
-import React from 'react'
+import React from "react";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 const App = (): React.ReactElement => {
   return (
-    <div>
-      <p>test</p>
-    </div>
-  )
-}
+    <Switch>
+      <Redirect exact path="/" to="teachers">
+        <p>Teachers</p>
+      </Redirect>
 
-export default App
+      <Route exact path="/teachers">
+        <p>Teachers</p>
+      </Route>
 
+      <Route exact path="/calendar">
+        <p>Calender</p>
+      </Route>
+
+      <Route exact path="/timetable">
+        <p>timetable</p>
+      </Route>
+    </Switch>
+  );
+};
+
+export default App;
