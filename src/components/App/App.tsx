@@ -1,15 +1,17 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
+import TeachersPage from "./../../pages/TeachersPage/TeachersPage";
+
 const App = (): React.ReactElement => {
   return (
     <Switch>
       <Redirect exact path="/" to="teachers">
-        <p>Teachers</p>
+        <TeachersPage />
       </Redirect>
 
       <Route exact path="/teachers">
-        <p>Teachers</p>
+        <TeachersPage />
       </Route>
 
       <Route exact path="/calendar">
