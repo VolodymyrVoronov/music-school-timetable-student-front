@@ -5,7 +5,7 @@ import Slide from "react-reveal/Slide";
 
 import { RootState } from "../../store/store";
 
-import { getTechers } from "../../store/reducers/teacherReducer/action";
+import { getTechers } from "../../store/reducers/teachersReducer/action";
 
 import Teacher from "./../Teacher/Teacher";
 import LoaderSpinner from "./../common/UI/LoaderSpinner/LoaderSpinner";
