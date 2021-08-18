@@ -6,12 +6,18 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import { TeacherContainer, TeacherText, TeacherIcon } from "./Teacher.styled";
 
-const Teacher = (): React.ReactElement => {
+interface TeacherProps {
+  firstName: string;
+  secondName: string;
+  _id: string;
+}
+
+const Teacher = ({ firstName, secondName, _id }: TeacherProps): React.ReactElement => {
   return (
     <Slide top>
       <TeacherContainer>
         <TeacherText>
-          Kotov Maxim
+          {secondName} {firstName}
           <TeacherIcon>
             <IoIosArrowForward />
           </TeacherIcon>

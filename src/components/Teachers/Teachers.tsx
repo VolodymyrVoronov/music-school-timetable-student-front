@@ -1,8 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
+import { RootState } from "../../store/store";
+
+import { getTechers } from "../../store/reducers/teacherReducer/action";
+
 import Teacher from "./../Teacher/Teacher";
+import LoaderSpinner from "./../common/UI/LoaderSpinner/LoaderSpinner";
 
 import {
   TeachersContainer,
@@ -14,21 +20,36 @@ import {
 import selectionImage01 from "./../../assets/selection-vector.svg";
 
 const Teachers = (): React.ReactElement => {
+  const dispatch = useDispatch();
+
+  const { teachers, loadingTeachers } = useSelector((state: RootState) => state.teachersReducer);
+
+  React.useEffect(() => {
+    dispatch(getTechers());
+  }, []);
+
+  const onTeacherBlockClick = () => {
+    console.log(`click`);
+  };
+
   return (
     <Slide top>
-      <TeachersContainer>
+      <TeachersContainer onClick={() => onTeacherBlockClick()}>
         <TeachersContainerLeft>
           <TeachersContainerLeftImage src={selectionImage01} />
         </TeachersContainerLeft>
         <TeachersContainerRight>
-          <Teacher />
-          <Teacher />
-          <Teacher />
-          <Teacher />
-          <Teacher />
-          <Teacher />
-          <Teacher />
-          <Teacher />
+          {loadingTeachers ? (
+            <LoaderSpinner bgColor="#ffffff" />
+          ) : (
+            <>
+              {teachers.map((teacher) => {
+                const { firstName, secondName, _id } = teacher;
+
+                return <Teacher key={_id} firstName={firstName} secondName={secondName} _id={_id} />;
+              })}
+            </>
+          )}
         </TeachersContainerRight>
       </TeachersContainer>
     </Slide>
