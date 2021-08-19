@@ -8,11 +8,23 @@ export interface TeacherType {
   _id: string;
 }
 
+export interface TimeTableType {
+  _id: string;
+  cardId: string;
+  order: number;
+  data: {
+    lessonStart: string;
+    lessonEnd: string;
+    student: string;
+  };
+}
+
 interface TeachersReducerStateType {
   teachers: TeacherType[];
   loadingTeachers: boolean;
   teacherId: string;
   date: string;
+  timetable: TimeTableType[];
 }
 
 const initialState = {
@@ -20,6 +32,7 @@ const initialState = {
   loadingTeachers: false,
   teacherId: "",
   date: "",
+  timetable: [],
 };
 
 const teachersReducer = (
@@ -52,6 +65,13 @@ const teachersReducer = (
       return {
         ...state,
         date: action.payload.date,
+      };
+    }
+
+    case SET_TEACHERS_TIMETABLE: {
+      return {
+        ...state,
+        timetable: action.payload as any,
       };
     }
 

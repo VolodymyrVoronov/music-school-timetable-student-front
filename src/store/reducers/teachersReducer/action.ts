@@ -16,6 +16,8 @@ export const setTeacherIdAC = (teacherId: string) => typedAction(SET_TEACHER_ID,
 
 export const setChosenDateAC = (date: string) => typedAction(SET_CHOSEN_DATE, { date });
 
+export const setTeachersTimetableAC = () => typedAction(SET_TEACHERS_TIMETABLE, {});
+
 export const getTechers = () => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadingTeachersAC(true));
@@ -48,5 +50,9 @@ export const fetchTeachersTimetable = (teacherId: string, date: string) => async
 };
 
 export type ActionTypes = ReturnType<
-  typeof getTeachersAC | typeof loadingTeachersAC | typeof setTeacherIdAC | typeof setChosenDateAC
+  | typeof getTeachersAC
+  | typeof loadingTeachersAC
+  | typeof setTeacherIdAC
+  | typeof setChosenDateAC
+  | typeof setTeachersTimetableAC
 >;
