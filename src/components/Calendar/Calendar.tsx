@@ -5,7 +5,7 @@ import DayPicker from "react-day-picker";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-// import { getChosenDateAC } from "../../store/reducers/timeTableEditorReducer/actions";
+import { setChosenDateAC } from "../../store/reducers/teachersReducer/action";
 
 import { MONTHS, WEEKDAYS_LONG, WEEKDAYS_SHORT } from "./../../const/const";
 
@@ -21,14 +21,16 @@ const Calendar = (): React.ReactElement => {
 
   const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     const date = e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10);
-    // dispatch(getChosenDateAC(date));
+    dispatch(setChosenDateAC(date));
 
-    history.push({
-      pathname: "/timetabler",
-      state: {
-        chosenDate: date,
-      },
-    });
+    if (date) {
+      history.push({
+        pathname: "/timetable",
+        state: {
+          chosenDate: date,
+        },
+      });
+    }
   };
 
   const onCancelButtonClick = () => {
@@ -46,15 +48,12 @@ const Calendar = (): React.ReactElement => {
           <CalendarBlock>
             <DayPicker
               onDayClick={onDayClick}
-              // onDayMouseEnter={onDayMouseEnter}
               locale="ru"
               months={MONTHS}
               weekdaysLong={WEEKDAYS_LONG}
               weekdaysShort={WEEKDAYS_SHORT}
               firstDayOfWeek={1}
-              // modifiers={modifiers}
               todayButton="Сегодня"
-              // onTodayButtonClick={(day, modifiers) => {}}
               disabledDays={[new Date(2017, 3, 12), { daysOfWeek: [0, 6] }]}
             />
           </CalendarBlock>

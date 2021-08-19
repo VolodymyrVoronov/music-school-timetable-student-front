@@ -7,5 +7,7 @@ const instanceAPI = axios.create({
 });
 
 const fetchTeachers = () => instanceAPI.get("/user");
+const fetchTimetable = (data: { teacherId: string; date: string }) =>
+  instanceAPI.post("/timetable/getTeachersTimetable", data);
 
-export { fetchTeachers };
+export { fetchTeachers, fetchTimetable };

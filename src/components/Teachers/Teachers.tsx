@@ -28,13 +28,9 @@ const Teachers = (): React.ReactElement => {
     dispatch(getTechers());
   }, []);
 
-  const onTeacherBlockClick = () => {
-    console.log(`click`);
-  };
-
   return (
     <Slide top>
-      <TeachersContainer onClick={() => onTeacherBlockClick()}>
+      <TeachersContainer>
         <TeachersContainerLeft>
           <TeachersContainerLeftImage src={selectionImage01} />
         </TeachersContainerLeft>
