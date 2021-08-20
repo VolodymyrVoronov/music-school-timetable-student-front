@@ -4,9 +4,16 @@ import { fetchTeachers, fetchTimetable } from "../../../api/api";
 
 import { typedAction } from "../helpers";
 
-import { TeacherType } from "./teachersReducer";
+import { TeacherType, TimeTableType } from "./teachersReducer";
 
-import { GET_TEACHERS, LOADING_TEACHERS, SET_TEACHER_ID, SET_CHOSEN_DATE, SET_TEACHERS_TIMETABLE } from "./actionTypes";
+import {
+  GET_TEACHERS,
+  LOADING_TEACHERS,
+  SET_TEACHER_ID,
+  SET_CHOSEN_DATE,
+  SET_TEACHERS_TIMETABLE,
+  LOADING_TIMETABLE,
+} from "./actionTypes";
 
 export const getTeachersAC = (teachers: TeacherType[]) => typedAction(GET_TEACHERS, { teachers });
 
@@ -16,7 +23,10 @@ export const setTeacherIdAC = (teacherId: string) => typedAction(SET_TEACHER_ID,
 
 export const setChosenDateAC = (date: string) => typedAction(SET_CHOSEN_DATE, { date });
 
-export const setTeachersTimetableAC = () => typedAction(SET_TEACHERS_TIMETABLE, {});
+export const setTeachersTimetableAC = (timetable: TimeTableType[]) =>
+  typedAction(SET_TEACHERS_TIMETABLE, { timetable });
+
+export const loadingTimetableAC = (loadingTimetable: boolean) => typedAction(LOADING_TIMETABLE, { loadingTimetable });
 
 export const getTechers = () => async (dispatch: Dispatch<AnyAction>) => {
   try {
@@ -42,11 +52,22 @@ export const getTechers = () => async (dispatch: Dispatch<AnyAction>) => {
 
 export const fetchTeachersTimetable = (teacherId: string, date: string) => async (dispatch: Dispatch<AnyAction>) => {
   try {
+    dispatch(loadingTimetableAC(true));
     const data = { teacherId, date };
 
     const response = await fetchTimetable(data);
-    console.log(response);
-  } catch (error) {}
+    if (response.status === 200) {
+      if (response.data.length !== 0) {
+        dispatch(setTeachersTimetableAC(response.data[0].cards));
+      } else {
+        dispatch(setTeachersTimetableAC([]));
+      }
+      dispatch(loadingTimetableAC(false));
+    }
+  } catch (error) {
+    console.log(error);
+    dispatch(loadingTimetableAC(false));
+  }
 };
 
 export type ActionTypes = ReturnType<
@@ -55,4 +76,5 @@ export type ActionTypes = ReturnType<
   | typeof setTeacherIdAC
   | typeof setChosenDateAC
   | typeof setTeachersTimetableAC
+  | typeof loadingTimetableAC
 >;

@@ -1,9 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import DayPicker from "react-day-picker";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+
+import { RootState } from "../../store/store";
 
 import { setChosenDateAC } from "../../store/reducers/teachersReducer/action";
 
@@ -18,6 +20,8 @@ import "react-day-picker/lib/style.css";
 const Calendar = (): React.ReactElement => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const { teacherId, date } = useSelector((state: RootState) => state.teachersReducer);
 
   const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     const date = e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10);
@@ -36,6 +40,10 @@ const Calendar = (): React.ReactElement => {
   const onCancelButtonClick = () => {
     history.replace("/teachers");
   };
+
+  if (!teacherId && !date) {
+    history.push("/teachers");
+  }
 
   return (
     <Slide top>

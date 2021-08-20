@@ -4,6 +4,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import TeachersPage from "./../../pages/TeachersPage/TeachersPage";
 import CalendarPage from "./../../pages/CalendarPage/CalendarPage";
 import TimetablePage from "./../../pages/TimetablePage/TimetablePage";
+import NoMatchPage from "./../../pages/NoMatchPage/NoMatchPage";
 
 const App = (): React.ReactElement => {
   return (
@@ -22,6 +23,10 @@ const App = (): React.ReactElement => {
 
       <Route exact path="/timetable">
         <TimetablePage />
+      </Route>
+
+      <Route path="*">
+        <NoMatchPage />
       </Route>
     </Switch>
   );

@@ -1,6 +1,13 @@
 import { ActionTypes } from "./action";
 
-import { GET_TEACHERS, LOADING_TEACHERS, SET_TEACHER_ID, SET_CHOSEN_DATE, SET_TEACHERS_TIMETABLE } from "./actionTypes";
+import {
+  GET_TEACHERS,
+  LOADING_TEACHERS,
+  SET_TEACHER_ID,
+  SET_CHOSEN_DATE,
+  SET_TEACHERS_TIMETABLE,
+  LOADING_TIMETABLE,
+} from "./actionTypes";
 
 export interface TeacherType {
   firstName: string;
@@ -25,6 +32,7 @@ interface TeachersReducerStateType {
   teacherId: string;
   date: string;
   timetable: TimeTableType[];
+  loadingTimetable: boolean;
 }
 
 const initialState = {
@@ -33,6 +41,7 @@ const initialState = {
   teacherId: "",
   date: "",
   timetable: [],
+  loadingTimetable: false,
 };
 
 const teachersReducer = (
@@ -71,7 +80,14 @@ const teachersReducer = (
     case SET_TEACHERS_TIMETABLE: {
       return {
         ...state,
-        timetable: action.payload as any,
+        timetable: action.payload.timetable,
+      };
+    }
+
+    case LOADING_TIMETABLE: {
+      return {
+        ...state,
+        loadingTimetable: action.payload.loadingTimetable,
       };
     }
 
