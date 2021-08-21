@@ -15,6 +15,8 @@ import {
   LOADING_TIMETABLE,
 } from "./actionTypes";
 
+import { NETWORK_STATUS } from "../../../const/const";
+
 export const getTeachersAC = (teachers: TeacherType[]) => typedAction(GET_TEACHERS, { teachers });
 
 export const loadingTeachersAC = (loadingTeachers: boolean) => typedAction(LOADING_TEACHERS, { loadingTeachers });
@@ -32,7 +34,7 @@ export const getTechers = () => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadingTeachersAC(true));
     const response = await fetchTeachers();
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       const teachersData = response.data.map((d: { firstName: string; secondName: string; _id: string }) => {
         return {
           firstName: d.firstName,
@@ -56,7 +58,7 @@ export const fetchTeachersTimetable = (teacherId: string, date: string) => async
     const data = { teacherId, date };
 
     const response = await fetchTimetable(data);
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       if (response.data.length !== 0) {
         dispatch(setTeachersTimetableAC(response.data[0].cards));
       } else {
