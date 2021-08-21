@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { colors } from "../../styles/colorPalette";
 
-import { s4, s8, s16, s20, s32 } from "./../../styles/spacer";
+import { s8, s16, s32 } from "./../../styles/spacer";
 
 const TimetableCardContainer = styled.div`
   display: flex;

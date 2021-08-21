@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../styles/colorPalette";
 import { boxShadow } from "../../styles/globalStylesVariables";
 
-import { s20, s32, s48, s64, s96, s160 } from "./../../styles/spacer";
+import { s32, s48, s64, s96 } from "./../../styles/spacer";
 
 const TeachersContainer = styled.div`
   display: flex;
