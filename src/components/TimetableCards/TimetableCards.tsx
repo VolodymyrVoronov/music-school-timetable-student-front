@@ -28,7 +28,7 @@ const TimetableCards = (): React.ReactElement => {
         ) : (
           <>
             <Slide top>
-              <TimetableCardsDate>Выбраная дата: {date}</TimetableCardsDate>
+              <TimetableCardsDate>Дата: {date}</TimetableCardsDate>
             </Slide>
             {timetable.length === 0 && (
               <>
