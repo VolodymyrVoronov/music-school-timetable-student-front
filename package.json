@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "react-day-picker": "^7.4.10",
     "react-icons": "^4.2.0",
     "react-loader-spinner": "^4.0.0",
